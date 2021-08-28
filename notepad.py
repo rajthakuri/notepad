@@ -1,6 +1,8 @@
 from tkinter import *
 import sqlite3
 import bcrypt
+from UI.sign_up import signup_ui
+from UI.login import login_UI
 from tkinter.messagebox import *
 
 root = Tk()
@@ -8,9 +10,16 @@ fullname = StringVar()
 username = StringVar()
 password = StringVar()
 
+signup_frame = Frame(root)
+signup_frame.pack()
+
+login_frame= Frame(root)
+login_frame.pack()
+
+
 root.geometry('500x500+200+200')
 
-def login():
+def signup():
     db = sqlite3.connect('app.db')
     cor = db.cursor()
     # cor.execute('''CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT , fullname text NOT NULL,
@@ -27,57 +36,7 @@ def login():
 
 
 
-Label(root,text='SIGNUP',fg='white',padx='15',pady='15',font='Helvetica,25').pack()
-Label(root,text='FULLNAME',fg='white',bg='black',padx='15',pady='15',font='Helvetica,25').pack()
-Entry(root,textvar=fullname,width=60,fg='black',bg='white',borderwidth=6,relief='flat').pack()
-Label(root,text='USERNAME',fg='white',pady='3',bg='black',font='Helvetica').pack()
-Entry(root,textvar=username,width=60,fg='black',bg='white',borderwidth=6,relief='flat').pack()
-Label(root,text='PASSWORD',fg='white',pady=3,bg='black',font='Helvetica').pack()
-Entry(root,textvar=password,show='*',width=60,fg='black',bg='white',borderwidth=6,relief='flat').pack()
-
-Button(text='LOGIN',bg='blue',border=0,font='Helvetica',fg='white',padx=18,pady=10,command=login).pack()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+signup_ui(signup_frame, fullname,username, password, signup )
+login_UI(login_frame, fullname,username, password, signup)
 
 root.mainloop()
